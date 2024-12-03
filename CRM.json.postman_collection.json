@@ -1,0 +1,6912 @@
+{
+	"info": {
+		"_postman_id": "56854d46-8470-4bd4-ad8a-e6ef90ee14e4",
+		"name": "CRM.json",
+		"description": "### [CRM App](https://app.cerebrumhub.com/learning/course/course-v1:Cerebrum_Hub+CS0008+2024_T12/home)\n\nThe client is a digital agency offering innovative marketing and web design solutions. The company organizes its sales and project management with a simple CRM platform. There are 3 main business processes that are supported by the CRM:\n\n- Collection of potential customers from different marketing channels and organising the marketing activities.\n    \n- Preparing offers, negotiating terms with potential customers and signing contracts.\n    \n- Managing projects with the signed contracts and tracking the progress of projects.\n    \n\nThe goal of this project was to build a stable and well-tested API for the following functionalities of the CRM system:\n\n- Leads management (creation and management of the customer’s database);\n    \n- Invitation of new users;\n    \n- Funnels management (creation and management of CRM funnels);\n    \n- Deals management (creation and management of deals in different funnels.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37795400"
+	},
+	"item": [
+		{
+			"name": "Leads",
+			"item": [
+				{
+					"name": "GET - the list of all leads",
+					"item": [
+						{
+							"name": "Get list of Leads",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "160",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "full_name_text",
+											"disabled": true
+										},
+										{
+											"key": "descending",
+											"value": "true",
+											"disabled": true
+										},
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - limit 0",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?limit=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "0"
+										},
+										{
+											"key": "sort_field",
+											"value": "full_name_text",
+											"disabled": true
+										},
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - limit 50 (default)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?limit=50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50"
+										},
+										{
+											"key": "sort_field",
+											"value": "full_name_text",
+											"disabled": true
+										},
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - limit 101 (exceeded)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?limit=101",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "101",
+											"description": "Max value exceeded "
+										},
+										{
+											"key": "sort_field",
+											"value": "full_name_text",
+											"disabled": true
+										},
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - negative limit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?limit=-50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "-50"
+										},
+										{
+											"key": "sort_field",
+											"value": "full_name_text",
+											"disabled": true
+										},
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - limit type boolean",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?limit=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "false"
+										},
+										{
+											"key": "sort_field",
+											"value": "full_name_text",
+											"disabled": true
+										},
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - cursor 0 (default)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?cursor=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - cursor 50",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?cursor=50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - negative cursor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?cursor=-50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "-50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - cursor type boolean",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?cursor=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - sort_field _id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?sort_field=_id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "_id"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - sort_field company_text",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?sort_field=company_text",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "company_text"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - sort_field email_text",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?sort_field=email_text",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "email_text"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - sort_field full_name_text",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?sort_field=full_name_text",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "full_name_text"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - sort_field full_name_text desc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?sort_field=full_name_text&descending=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"AGBENU RICHARD\"}]",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "full_name_text"
+										},
+										{
+											"key": "descending",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - constraints company_text",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?constraints=[{\"key\":\"company_text\",\"constraint_type\":\"equals\",\"value\":\"Babylab\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"company_text\",\"constraint_type\":\"equals\",\"value\":\"Babylab\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - constraints email_text",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?constraints=[{\"key\":\"email_text\",\"constraint_type\":\"equals\",\"value\":\"gatuso@demo.com\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"email_text\",\"constraint_type\":\"equals\",\"value\":\"gatuso@demo.com\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Leads - constraints full_name_text",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead?constraints=[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"Kirilio Gatuso\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"full_name_text\",\"constraint_type\":\"equals\",\"value\":\"Kirilio Gatuso\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - lead by Id",
+					"item": [
+						{
+							"name": "Get Lead by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724780848182x242395089099329150"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Lead by non-existing Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724780848182x242395089099329500"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Lead by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724780848182x242395089099329150"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST - create new lead",
+					"item": [
+						{
+							"name": "Create a new Lead - all fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Lead Team 5\",\n  \"email_text\": \"random.email@gmail.com\",\n  \"full_name_text\": \"Team 5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Lead - no mandatory fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"\",\n  \"email_text\": \"\",\n  \"full_name_text\": \"Team 5 - no email, no company\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Lead - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Lead Team 5\",\n  \"email_text\": \"random.email@gmail.com\",\n  \"full_name_text\": \"Team 5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Lead - empty body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Lead - empty fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"\",\n  \"email_text\": \"\",\n  \"full_name_text\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Lead - company_text over 50 symbols",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Team5Team5Team5Team5Team5Team5Team5Team5Team5Team5Team5\",\n  \"email_text\": \"team5@gmail.com\",\n  \"full_name_text\": \"Team 5 55\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Lead - email_text over 100 symbols",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Team 5.2\",\n  \"email_text\": \"Anemailwithmorethan100symbolsqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzx@gmail.com\",\n  \"full_name_text\": \"Team 5.100\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Lead - full_name_text over 50 symbols",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Team 5.3\",\n  \"email_text\": \"randomemail2@gmail.com\",\n  \"full_name_text\": \"Team5Team5Team5Team5Team5Team5Team5Team5Team5Team5Team5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH - modify lead data",
+					"item": [
+						{
+							"name": "Modify Lead by Id",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Maurus AS\",\n  \"email_text\": \"Maurus@test.com\",\n  \"full_name_text\": \"Maurus\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725010563849x249896618869343900"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Lead by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Maurus AS\",\n  \"email_text\": \"Maurus@test.com\",\n  \"full_name_text\": \"Maurus\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724788764523x697336527403194000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Lead by Id - wrong ID",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Maurus AS\",\n  \"email_text\": \"Maurus@test.com\",\n  \"full_name_text\": \"Maurus\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725010563849x2498966188693439001"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT - replace lead data",
+					"item": [
+						{
+							"name": "Replace Lead by Id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Maurus AS\",\n  \"email_text\": \"Maurus@test.com\",\n  \"full_name_text\": \"Maurus\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724788764523x697336527403194000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Lead by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Maurus AS\",\n  \"email_text\": \"Maurus@test.com\",\n  \"full_name_text\": \"Maurus no authorization\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725010563849x249896618869343900"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Lead by Id - empty body",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724788764523x697336527403194000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Lead by Id - company_text over 50 symbols",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"01234567890123456789012345678901234567890123456789 over 50 symbols\",\n  \"email_text\": \"Maurus@test.com\",\n  \"full_name_text\": \"Maurus\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724788764523x697336527403194000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Lead by Id - email_text over 100 symbols",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Maurus AS\",\n  \"email_text\": \"0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789@emailOver100symbols.com\",\n  \"full_name_text\": \"Maurus\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724788764523x697336527403194000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Lead by Id - full_name_text over 50 symbols",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"company_text\": \"Maurus AS\",\n  \"email_text\": \"Maurus@test.com\",\n  \"full_name_text\": \"01234567890123456789012345678901234567890123456789NameOver50Symbols\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "<string>",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725010563849x249896618869343900"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE - remove lead data",
+					"item": [
+						{
+							"name": "Delete Lead by Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724803438977x671762482678706100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Lead by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724803438977x671762482678706100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Lead by Id - wrong ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/lead/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"lead",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725010690955x5867103372590432001"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Magicuser",
+			"item": [
+				{
+					"name": "GET - the list of all magicusers",
+					"item": [
+						{
+							"name": "Get list of Magicusers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - limit 40",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?limit=40",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "40"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - limit string",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?limit=test",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "test"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - limit boolean",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?limit=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - limit array",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?limit=[\"apple\", \"banana\", \"cherry\"]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "[\"apple\", \"banana\", \"cherry\"]"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - limit 0",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?limit=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - limit -1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?limit=-1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "-1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - limit 101",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?limit=101",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - cursor 0",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?cursor=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - cursor string",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?cursor=test",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "test"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - cursor boolean",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?cursor=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - cursor -1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?cursor=-1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "-1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - sort_field link_opened_boolean",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?sort_field=link_opened_boolean",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "sort_field",
+											"value": "link_opened_boolean"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - sort_field link_opened_boolean desc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?sort_field=link_opened_boolean&descending=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "sort_field",
+											"value": "link_opened_boolean"
+										},
+										{
+											"key": "descending",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Magicusers - constraint link_opened_boolean is_empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser?sort_field=link_opened_boolean&constraints=[{\"key\": \"link_opened_boolean\", \"constraint_type\": \"is_empty\", \"value\": \"\" }]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									],
+									"query": [
+										{
+											"key": "sort_field",
+											"value": "link_opened_boolean"
+										},
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"link_opened_boolean\", \"constraint_type\": \"is_empty\", \"value\": \"\" }]"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - magicuser by Id",
+					"item": [
+						{
+							"name": "Get Magicuser by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1724921387773x232133566205667400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Magicuser by non-existent Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1724921387773x232133566205667777"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Magicuser by Id - empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Magicuser by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1626167815763x526098639265464300"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST - create a new magicuser",
+					"item": [
+						{
+							"name": "Create a new Magicuser - all fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email_text\": \"Maurus.test@gmail.com\",\n  \"link_opened_boolean\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Magicuser - all fields no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email_text\": \"test.ch@gmail.com\",\n  \"link_opened_boolean\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Magicuser - empty body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Magicuser - email_text empty",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email_text\": \"\",\n  \"link_opened_boolean\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Magicuser - email_text invalid data",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email_text\": 1,\n  \"link_opened_boolean\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Magicuser - email_text > limit 100",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email_text\": 1,\n  \"link_opened_boolean\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/magicuser",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"magicuser"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Funnels",
+			"item": [
+				{
+					"name": "GET - get the list of all funnels",
+					"item": [
+						{
+							"name": "Get list of Funnels",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "api_token",
+											"value": "{{AUTH_TOKEN}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - limit 0",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?limit=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - limit 50",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?limit=50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - negative limit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?limit=-50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "-50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - limit 101",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?limit=101",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "101"
+										},
+										{
+											"key": "cursor",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - limit type boolean",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?limit=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "true"
+										},
+										{
+											"key": "cursor",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - limit type array",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?limit= [\"apple\", \"banana\", \"cherry\"]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": " [\"apple\", \"banana\", \"cherry\"]"
+										},
+										{
+											"key": "cursor",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - cursor 0",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?cursor=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - cursor 50",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?cursor=50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - negative cursor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?cursor=-50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "-50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - cursor type boolean",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?cursor=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - cursor type string",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?cursor=john_doe",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "john_doe"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - sort_field name_text",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?sort_field=name_text&limit=50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "sort_field",
+											"value": "name_text"
+										},
+										{
+											"key": "limit",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - sort_field name_text desc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?sort_field=name_text&descending=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "sort_field",
+											"value": "name_text"
+										},
+										{
+											"key": "descending",
+											"value": "true"
+										},
+										{
+											"key": "limit",
+											"value": "50",
+											"disabled": true
+										},
+										{
+											"key": "cursor ",
+											"value": "0",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - constraints members_list_user not empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?constraints=[{\"key\": \"members_list_user\", \"constraint_type\": \"not empty\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"members_list_user\", \"constraint_type\": \"not empty\"}]"
+										},
+										{
+											"key": "limit",
+											"value": "-10",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "-5",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "_id",
+											"disabled": true
+										},
+										{
+											"key": "desc",
+											"value": "true",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - constraints members_list_user empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?constraints=[{\"key\": \"members_list_user\", \"constraint_type\": \"empty\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "-10",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "-5",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "_id",
+											"disabled": true
+										},
+										{
+											"key": "desc",
+											"value": "true",
+											"disabled": true
+										},
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"members_list_user\", \"constraint_type\": \"empty\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - constraints stage_list_custom_stage not empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?constraints=[{\"key\": \"stage_list_custom_stage\", \"constraint_type\": \"not empty\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"stage_list_custom_stage\", \"constraint_type\": \"not empty\"}]"
+										},
+										{
+											"key": "limit",
+											"value": "-10",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "-5",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "_id",
+											"disabled": true
+										},
+										{
+											"key": "desc",
+											"value": "true",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Funnels - constraints stage_list_custom_stage empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel?constraints=[{\"key\": \"stage_list_custom_stage\", \"constraint_type\": \"empty\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "-10",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "-5",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "_id",
+											"disabled": true
+										},
+										{
+											"key": "desc",
+											"value": "true",
+											"disabled": true
+										},
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"stage_list_custom_stage\", \"constraint_type\": \"empty\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - funnel by Id",
+					"item": [
+						{
+							"name": "Get Funnel by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Funnel by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1678717895619x961701523337510900"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Funnel by empty Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Funnel by non-existing Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID?UniqueID=167",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "UniqueID",
+											"value": "167"
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724661934257x727805806580950081"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Funnel by invalid type",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID?UniqueID=167",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "UniqueID",
+											"value": "167"
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "12345"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST - create new funnel",
+					"item": [
+						{
+							"name": "Create  a new Funnel",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"members_list_user\": [\n    \"1625047362532x398219546419355650\",\n    \"1625047373081x778685405315052900\"\n  ],\n  \"name_text\": \"Team 5 Test\",\n  \"stage_list_custom_stage\": [\n    \"1625047817853x119627538480651550\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Funnel - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"members_list_user\": [\n    \"1625047362532x398219546419355650\"\n  ],\n  \"name_text\": \"Team 5 no_auth\",\n  \"stage_list_custom_stage\": [\n    \"1625047817853x119627538480651550\",\n    \"1625047818390x664413796313397600\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create  a new Funnel - empty body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create  a new Funnel - empty fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"members_list_user\": [\n    \"\",\n    \"\"\n  ],\n  \"name_text\": \"\",\n  \"stage_list_custom_stage\": [\n    \"\",\n    \"\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH - modify funnel data",
+					"item": [
+						{
+							"name": "Modify Funnel by Id - name_text",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name_text\": \"Team 5_Test Patch\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Funnel by Id - name_text no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name_text\": \"Team 5_Test Patch1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Funnel by Id - name_text boolean",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name_text\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Funnel by Id - members_list_user",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"members_list_user\": [\r\n     \"1625047362532x398219546419355650\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Funnel by Id - members_list_user number",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"members_list_user\": 162\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Funnel by Id - stage_list_custom_stage",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"stage_list_custom_stage\": [\r\n\"1724754232312x836417956936006400\",\r\n\"1724754232592x426388216980834400\",\r\n\"1724754233044x396443822862285300\",\r\n\"1724754233236x705762288514601300\"\r\n]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Funnel by Id - stage_list_custom_stage object",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"stage_list_custom_stage\": \r\n{\r\n    \"name\": \"John Doe\",\r\n    \"age\": 30,\r\n    \"email\": \"johndoe@example.com\"\r\n}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Funnel by Id - all fields",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"members_list_user\": [\r\n    \"1625047362532x398219546419355650\",\r\n    \"1657897085311x920666300518670800\"\r\n  ],\r\n  \"name_text\": \"Team 5_Test Patch2\",\r\n  \"stage_list_custom_stage\": [\r\n    \"1724754232312x836417956936006400\",\r\n    \"1724754233044x396443822862285300\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Funnel by Id - empty body",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Funnel by Id - empty fields",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"members_list_user\": [\r\n    \"\",\r\n    \"\"\r\n  ],\r\n  \"name_text\": \"\",\r\n  \"stage_list_custom_stage\": [\r\n    \"\",\r\n    \"\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754231777x201685280690536450"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT - replace funnel data",
+					"item": [
+						{
+							"name": "Replace Funnel by Id - all fields valid",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"members_list_user\": [\r\n    \"1625047362532x398219546419355650\",\r\n    \"1657897085311x920666300518670800\"\r\n  ],\r\n  \"name_text\": \"Team 5_Test PUT\",\r\n  \"stage_list_custom_stage\": [\r\n    \"1724754232312x836417956936006400\",\r\n    \"1724754233236x705762288514601300\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724677207945x687761705721445400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Funnel by Id - all fields no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"members_list_user\": [\r\n    \"1625047362532x398219546419355650\",\r\n    \"1657897085311x920666300518670800\"\r\n  ],\r\n  \"name_text\": \"Team 5_Test PUT2\",\r\n  \"stage_list_custom_stage\": [\r\n    \"1724754232312x836417956936006400\",\r\n    \"1724754233236x705762288514601300\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724677207945x687761705721445400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Funnel by Id - members_list_user boolean",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"members_list_user\": true,\r\n  \"name_text\": \"Team 5_Test PUT2\",\r\n  \"stage_list_custom_stage\": [\r\n    \"1724754232312x836417956936006400\",\r\n    \"1724754233236x705762288514601300\",\r\n    \"1724754232592x426388216980834400\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724677207945x687761705721445400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Funnel by Id - name_text number",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"members_list_user\": [\r\n    \"1625047362532x398219546419355650\",\r\n    \"1657897085311x920666300518670800\"\r\n    ],\r\n  \"name_text\": 150,\r\n  \"stage_list_custom_stage\": [\r\n    \"1724754232312x836417956936006400\",\r\n    \"1724754233236x705762288514601300\",\r\n    \"1724754232592x426388216980834400\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724677207945x687761705721445400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Funnel by Id - stage_list_custom_stage number",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"members_list_user\": [\r\n    \"1625047362532x398219546419355650\",\r\n    \"1657897085311x920666300518670800\"\r\n    ],\r\n  \"name_text\": \"Team 5_Test PUT\",\r\n  \"stage_list_custom_stage\":123\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724677207945x687761705721445400"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE - remove funnel data",
+					"item": [
+						{
+							"name": "Delete Funnel by Id - valid Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724676984296x664109992932378900"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Funnel by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724677207945x687761705721445400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Funnel by Id - non-existing Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724676984296x664109992932370089"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Funnel by Id - Id boolean",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/funnel/:UniqueID?",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"funnel",
+										":UniqueID"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null
+										}
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Stages",
+			"item": [
+				{
+					"name": "GET - the list of all stages",
+					"item": [
+						{
+							"name": "Get list of Stages",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - limit 0",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?limit=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - limit 50",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?limit=50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - negative limit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?limit=-100",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "-100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - limit 101",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?limit=101",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - limit type boolean",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?limit=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - cursor 0",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?cursor=0",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - cursor 50",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?cursor=50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - negative cursor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?cursor=-50",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "-50"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - cursor type string",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?cursor=example@example.com",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "example@example.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - sort_field name_text",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?sort_field =name_text",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "sort_field ",
+											"value": "name_text"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - sort_field name_text desc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?sort_field =name_text&descending=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\": \"name_text\", \"constraint_type\": \"equals\", \"value\": \"LIVE stage 3 \" }]",
+											"disabled": true
+										},
+										{
+											"key": "sort_field ",
+											"value": "name_text"
+										},
+										{
+											"key": "descending",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - constraints color_option_colors",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?constraints=[{\"key\":\"color_option_colors\",\"constraint_type\":\"equals\",\"value\":\"Pinkish\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"color_option_colors\",\"constraint_type\":\"equals\",\"value\":\"Pinkish\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - constraints color_option_colors invalid color",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?constraints=[{\"key\":\"color_option_colors\",\"constraint_type\":\"equals\",\"value\":\"Red\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"color_option_colors\",\"constraint_type\":\"equals\",\"value\":\"Red\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - constraints deals_list_custom_deal1 empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?constraints=[{\"key\":\"deals_list_custom_deal1\",\"constraint_type\":\"empty\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"deals_list_custom_deal1\",\"constraint_type\":\"empty\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Stages - constraints deals_list_custom_deal1 not empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage?constraints=[{\"key\":\"deals_list_custom_deal1\",\"constraint_type\":\"not empty\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{\"key\":\"deals_list_custom_deal1\",\"constraint_type\":\"not empty\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - stage by Id",
+					"item": [
+						{
+							"name": "Get Stage by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Stage by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1724754232592x426388216980834400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Stage by empty Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Stage by non-existing Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1724754232312x836417956936000064"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Stage by invalid Id type",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST - create a new stage",
+					"item": [
+						{
+							"name": "Create a new Stage - no deals",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"color_option_colors\": \"Pinkish\",\n  \"deals_list_custom_deal1\": [],\n  \"funnel_custom_funnel1\": \"1724677207945x687761705721445400\",\n  \"name_text\": \"Team5 test stage {{$randomPhoneNumber}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Stage - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"color_option_colors\": \"Orange\",\n  \"deals_list_custom_deal1\": [],\n  \"funnel_custom_funnel1\": \"1724677207945x687761705721445400\",\n  \"name_text\": \"Team5 no auth\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Stage - name_text 25 characters",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"color_option_colors\": \"Pinkish\",\n  \"deals_list_custom_deal1\": [],\n  \"funnel_custom_funnel1\": \"1724677207945x687761705721445400\",\n  \"name_text\": \"stagestagestagestagestage\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Stage - no funnel, no deals",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"color_option_colors\": \"Green\",\n  \"deals_list_custom_deal1\": [],\n  \"funnel_custom_funnel1\": \"\",\n  \"name_text\": \"Team 5 nfnd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Stage - no color, no deals",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"color_option_colors\": \"Blue\",\n  \"deals_list_custom_deal1\": [],\n  \"funnel_custom_funnel1\": \"1724677207945x687761705721445400\",\n  \"name_text\": \"Team 5 ncnd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Stage - no funnel, no deals, invalid color_option_colors",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"color_option_colors\": \"Red\",\n  \"deals_list_custom_deal1\": [],\n  \"funnel_custom_funnel1\": \"\",\n  \"name_text\": \"Team 5 ncndic\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Stage - no funnel, no deals, name type boolean",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"color_option_colors\": \"Blue\",\n  \"deals_list_custom_deal1\": [],\n  \"funnel_custom_funnel1\": \"\",\n  \"name_text\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Stage - no funnel, no deals, color_option_colors type boolean",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"color_option_colors\": true,\n  \"deals_list_custom_deal1\": [],\n  \"funnel_custom_funnel1\": \"\",\n  \"name_text\": \"false\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Stage - empty body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Stage - empty fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"color_option_colors\": \"\",\n  \"deals_list_custom_deal1\": [],\n  \"funnel_custom_funnel1\": \"\",\n  \"name_text\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH - modify stage data",
+					"item": [
+						{
+							"name": "Modify Stage by Id - name_text",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name_text\": \"Stage Team 5a.2a\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Stage by Id - name_text no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name_text\": \"Stage Team 5a.2b\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Stage by Id - name_text array",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name_text\": [\"Alice\", \"Bob\", \"Charlie\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Stage by Id - color_option_colors",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"color_option_colors\": \"Green\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Stage by Id - color_option_colors number",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"color_option_colors\": 13\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Stage by Id - funnel_custom_funnel1",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"funnel_custom_funnel1\": \"1724677207945x687761705721445400\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Stage by Id - all fields",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"color_option_colors\": \"Orange\",\r\n  \"deals_list_custom_deal1\": [\r\n    \"1625048776390x154465121472086000\",\r\n    \"1625059610252x253847122278088700\"\r\n  ],\r\n  \"funnel_custom_funnel1\": \"1724754231777x201685280690536450\",\r\n  \"name_text\": \"Stage Team 5a.1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Stage by Id - empty body",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Stage by Id - empty fields",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"color_option_colors\": \"\",\r\n  \"deals_list_custom_deal1\": [\r\n  ],\r\n  \"funnel_custom_funnel1\": \"\",\r\n  \"name_text\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754232312x836417956936006400"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT - replace stage data",
+					"item": [
+						{
+							"name": "Replace Stage by Id - all fields valid",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"color_option_colors\": \"Orange\",\r\n  \"deals_list_custom_deal1\": [\r\n    \"1625048776390x154465121472086000\"\r\n  ],\r\n  \"funnel_custom_funnel1\": \"1724754231777x201685280690536450\",\r\n  \"name_text\": \"Team5 test stage PUT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724868317237x449063911051074800"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Stage by Id - all fields no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"color_option_colors\": \"Orange\",\r\n  \"deals_list_custom_deal1\": [\r\n    \"1625048776390x154465121472086000\"\r\n  ],\r\n  \"funnel_custom_funnel1\": \"1724754231777x201685280690536450\",\r\n  \"name_text\": \"Team5 test stage PUT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724868317237x449063911051074800"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Stage by Id - color_option_colors boolean",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"color_option_colors\": false,\r\n  \"deals_list_custom_deal1\": [\r\n    \"1625048776390x154465121472086000\"\r\n  ],\r\n  \"funnel_custom_funnel1\": \"1724754231777x201685280690536450\",\r\n  \"name_text\": \"Team5 test stage PUT\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724868317237x449063911051074800"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Stage by Id - name_text boolean",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"color_option_colors\": \"Orange\",\r\n  \"deals_list_custom_deal1\": [\r\n    \"1625048776390x154465121472086000\"\r\n  ],\r\n  \"funnel_custom_funnel1\": \"1724754231777x201685280690536450\",\r\n  \"name_text\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724868317237x449063911051074800"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE - remove stage data",
+					"item": [
+						{
+							"name": "Delete Stage by Id - valid Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754233236x705762288514601300"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Stage by Id - valid Id no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754233044x396443822862285300"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Stage by Id - non-existing Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1724754233044x396443822862285000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Stage by Id - Id boolean",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/stage/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"stage",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Deals",
+			"item": [
+				{
+					"name": "GET - the list of all deals",
+					"item": [
+						{
+							"name": "Get list of Deals",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - valid limit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal?limit=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - negative limit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal?limit=-10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "-10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - valid cursor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal?limit=10&cursor=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "cursor",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - negative cursor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal?limit=10&cursor=-10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "cursor",
+											"value": "-10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - sort_field company_name_text ASC",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal?sort_field=company_name_text&descending=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "company_name_text"
+										},
+										{
+											"key": "descending",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - sort_field name_text DESC",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal?sort_field=name_text&descending=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "name_text"
+										},
+										{
+											"key": "descending",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - sort_field created date ASC",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal?sort_field=Created Date&descending=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "sort_field",
+											"value": "Created Date"
+										},
+										{
+											"key": "descending",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - constraints status_option_status Won",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal?constraints=[{ \"key\":\"status_option_status\", \"constraint_type\": \"equals\",\"value\":\"Won\"}]\n",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{ \"key\":\"status_option_status\", \"constraint_type\": \"equals\",\"value\":\"Won\"}]\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Deals - constraints note_list_custom_note not empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal?constraints=[{ \"key\":\"note_list_custom_note\", \"constraint_type\": \"not empty\"}]\n",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{ \"key\":\"note_list_custom_note\", \"constraint_type\": \"not empty\"}]\n"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - deal by Id",
+					"item": [
+						{
+							"name": "Get Deal by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1726062541741x878098362949537600"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Deal by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1625048131815x332253337528303600"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Deal by Id - non-existing Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1625048131815x332253337528303000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Deal by Id - wrong Id type",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST - create a new deal",
+					"item": [
+						{
+							"name": "Create a new Deal - mandatory fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assignee__user\": \"1625047362532x398219546419355650\",\n  \"company_name_text\": \"Team 5 mandatory fields\",\n  \"deal_value_estimation_number\": 700000,\n  \"name_text\": \"Haribo Goldbears - Promo campaign\",\n  \"order_number\": 5,\n  \"status_option_status\": \"In progress\",\n  \"visible_to_list_user\": [\n    \"1625047362532x398219546419355650\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Deal - all fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assignee__user\": \"1625047373081x778685405315052900\",\n  \"company_name_text\": \"Team 5 all fields\",\n  \"deal_value_estimation_number\": 500,\n  \"description_text\": \"This is a test deal\",\n  \"file_list_custom_data_file\": [\n    \"1647262794715x376755327337758700\",\n    \"1647262830545x113983646886789120\"\n  ],\n  \"funnel_custom_funnel1\": \"1724677207945x687761705721445400\",\n  \"lead_custom_lead\": \"1725012477904x962236867638862600\",\n  \"logo_image\": \"https://s3.amazonaws.com/appforest_uf/f1625060020121x284193349144459940/Screenshot%202021-06-30%20at%2016.33.31.png\",\n  \"name_text\": \"Haribo Watermelon - Promo campaign\",\n  \"note_list_custom_note\": [\n    \"1678718690483x188510294479732740\"\n  ],\n  \"order_number\": 33,\n  \"stage_custom_stage\": \"1724754232592x426388216980834400\",\n  \"status_option_status\": \"Won\",\n  \"visible_to_list_user\": [\n    \"1625047373081x778685405315052900\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Deal - without mandatory fields",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"description_text\": \"Team 5 Test no mandatory fields\",\n  \"funnel_custom_funnel1\": \"1724748016077x923297551481141200\",\n  \"lead_custom_lead\": \"1725010563849x249896618869343900\",\n  \"note_list_custom_note\": [\n    \"1678718571924x727404269818871800\"\n  ],\n  \"stage_custom_stage\": \"1724754232312x836417956936006400\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Deal - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assignee__user\": \"1625047362532x398219546419355650\",\n  \"company_name_text\": \"Team 5 no auth\",\n  \"deal_value_estimation_number\": 700001,\n  \"name_text\": \"Haribo Starmix - Promo campaign\",\n  \"order_number\": 55,\n  \"status_option_status\": \"In progress\",\n  \"visible_to_list_user\": [\n    \"1625047362532x398219546419355650\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Deal - wrong assignee__user data type",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assignee__user\": 123,\n  \"company_name_text\": \"Team 5 wrong user value\",\n  \"deal_value_estimation_number\": 501,\n  \"name_text\": \"Haribo - Promo campaign\",\n  \"order_number\": 35,\n  \"status_option_status\": \"Lost\",\n  \"visible_to_list_user\": [\n    \"1625047373081x778685405315052900\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Deal - wrong status_option_status value",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assignee__user\": \"1625047373081x778685405315052900\",\n  \"company_name_text\": \"Team 5 wrong status\",\n  \"deal_value_estimation_number\": 500,\n  \"description_text\": \"This is a test deal 2\",\n  \"funnel_custom_funnel1\": \"1724677207945x687761705721445400\",\n  \"lead_custom_lead\": \"1725012477904x962236867638862600\",\n  \"name_text\": \"Haribo Peaches - Promo campaign\",\n  \"order_number\": 34,\n  \"stage_custom_stage\": \"1724754232592x426388216980834400\",\n  \"status_option_status\": \"None\",\n  \"visible_to_list_user\": [\n    \"1625047373081x778685405315052900\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Deal - wrong deal_value_estimation_number data type",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assignee__user\": \"1625047373081x778685405315052900\",\n  \"company_name_text\": \"Team 5 wrong estimation value\",\n  \"deal_value_estimation_number\": false,\n  \"name_text\": \"Haribo 2 - Promo campaign\",\n  \"order_number\": 36,\n  \"status_option_status\": \"Lost\",\n  \"visible_to_list_user\": [\n    \"1625047373081x778685405315052900\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Deal - empty body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Deal - for e2e",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assignee__user\": \"1625047362532x398219546419355650\",\n  \"company_name_text\": \"DaryaT5\",\n  \"deal_value_estimation_number\": 1000,\n  \"description_text\": \"Great offer\",\n  \"funnel_custom_funnel1\": \"1726061401858x313545452277989400\",\n  \"name_text\": \"Offer DaryaT5\",\n  \"order_number\": 1,\n  \"stage_custom_stage\": \"1726061403612x448100003185685200\",\n  \"status_option_status\": \"In progress\",\n  \"visible_to_list_user\": [\n    \"1625047362532x398219546419355650\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH - modify deal data",
+					"item": [
+						{
+							"name": "Modify Deal by Id - company_name_text & name_text Copy",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"company_name_text\": \"Team 5 do not delete - PATCH\",\r\n\"name_text\": \"Haribo Watermelon\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725522637515x332956148267110850"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Deal by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"company_name_text\": \"Team 5 do not delete - PATCH2\",\r\n\"name_text\": \"Haribo Watermelon 2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725522637515x332956148267110850"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Deal by Id - company_name boolean, order_number string",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"company_name_text\": true,\r\n\"order_number\": \"Team 5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725522637515x332956148267110850"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Deal by Id - for e2e",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"status_option_status\": \"Lost\",\r\n  \"note_list_custom_note\": [\r\n            \"1726063993744x315549103983165440\",\r\n            \"1726132163199x187497186108835900\"\r\n        ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1726062541741x878098362949537600"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT - replace deal data",
+					"item": [
+						{
+							"name": "Replace Deal by Id - all fields valid",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"assignee__user\": \"1625125825767x718816571317085800\",\r\n  \"company_name_text\": \"Team 5 replace\",\r\n  \"deal_value_estimation_number\": 100,\r\n  \"description_text\": \"Testing PUT method\",\r\n  \"funnel_custom_funnel1\": \"1724748016077x923297551481141200\",\r\n  \"lead_custom_lead\": \"1725011886770x256041149107739460\",\r\n  \"name_text\": \"Team 5\",\r\n  \"note_list_custom_note\": [\r\n    \"1678718571924x727404269818871800\"\r\n  ],\r\n  \"order_number\": 0,\r\n  \"status_option_status\": \"Lost\",\r\n  \"visible_to_list_user\": [\r\n    \"1625125825767x718816571317085800\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725527909024x597573572521849900"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Deal by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"assignee__user\": \"1625125825767x718816571317085800\",\r\n  \"company_name_text\": \"Team 5 replace\",\r\n  \"deal_value_estimation_number\": 100,\r\n  \"description_text\": \"Testing PUT method\",\r\n  \"funnel_custom_funnel1\": \"1724748016077x923297551481141200\",\r\n  \"lead_custom_lead\": \"1725011886770x256041149107739460\",\r\n  \"name_text\": \"Team 5\",\r\n  \"note_list_custom_note\": [\r\n    \"1678718571924x727404269818871800\"\r\n  ],\r\n  \"order_number\": 0,\r\n  \"stage_custom_stage\": \"string\",\r\n  \"status_option_status\": \"string\",\r\n  \"visible_to_list_user\": [\r\n    \"1625125825767x718816571317085800\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725527909024x597573572521849900"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Deal by Id - company_name boolean, order_number string",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"assignee__user\": \"1625125825767x718816571317085800\",\r\n  \"company_name_text\": true,\r\n  \"deal_value_estimation_number\": 100,\r\n  \"description_text\": \"Testing PUT method\",\r\n  \"funnel_custom_funnel1\": \"1724748016077x923297551481141200\",\r\n  \"lead_custom_lead\": \"1725011886770x256041149107739460\",\r\n  \"name_text\": \"Team 5\",\r\n  \"note_list_custom_note\": [\r\n    \"1678718571924x727404269818871800\"\r\n  ],\r\n  \"order_number\": \"text1\",\r\n  \"stage_custom_stage\": \"1724754233044x396443822862285300\",\r\n  \"status_option_status\": \"Won\",\r\n  \"visible_to_list_user\": [\r\n    \"1625125825767x718816571317085800\"\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725527909024x597573572521849900"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE - remove deal data",
+					"item": [
+						{
+							"name": "Delete Deal by Id - valid Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725521410379x283042201399783740"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Deal by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725522637515x332956148267110850"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Deal by Id - non-existing Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/deal/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"deal",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725521410379x283042201399783000"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "GET - the list of all notes",
+					"item": [
+						{
+							"name": "Get list of Notes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Notes - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Notes - valid limit",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note?limit=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Notes - valid cursor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note?cursor=10&limit=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "10"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Notes - negative cursor",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note?cursor=-10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									],
+									"query": [
+										{
+											"key": "cursor",
+											"value": "-10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Notes - sort_field content_text DESC",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note?sort_field=content_text&descending=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									],
+									"query": [
+										{
+											"key": "sort_field",
+											"value": "content_text"
+										},
+										{
+											"key": "descending",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Notes - sort_field Created Date ASC",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note?sort_field=Created Date&descending=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									],
+									"query": [
+										{
+											"key": "sort_field",
+											"value": "Created Date"
+										},
+										{
+											"key": "descending",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get list of Notes - constraints content_text empty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note?constraints=[{ \"key\":\"content_text\", \"constraint_type\": \"is_empty\"}]",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									],
+									"query": [
+										{
+											"key": "constraints",
+											"value": "[{ \"key\":\"content_text\", \"constraint_type\": \"is_empty\"}]"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - note by Id",
+					"item": [
+						{
+							"name": "Get Note by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1726060597522x781528511926028400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Note by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1678718571924x727404269818871800"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Note by Id - non-existing Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "123456789"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Note by Id - for e2e",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "123456789"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST - create a new note",
+					"item": [
+						{
+							"name": "Create a new Note - valid data",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": \"Maurus test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Note - empty body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Note - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": \"Maurus test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Note - wrong data type",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": 123456789\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Note - for E2E",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": \"The client decided to cancel the deal\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH - modify note data",
+					"item": [
+						{
+							"name": "Modify Note by Id - valid data",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": \"Ahti test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1726060597522x781528511926028400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Note by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": \"Ahti test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725807687295x743084840003845600"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Note by Id - wrong data type",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": 123456789\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725807687295x743084840003845600"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT - replace note data",
+					"item": [
+						{
+							"name": "Replace Note by Id - valid data",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": \"Maurus+Ahti test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1726060597522x781528511926028400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Note by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": \"Maurus+Ahti test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725807687295x743084840003845600"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Replace Note by Id - wrong data type",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"content_text\": 123456789\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1725807687295x743084840003845600"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE - remove note data",
+					"item": [
+						{
+							"name": "Delete Note by Id - valid Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1726060597522x781528511926028400"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Note by Id - no authorization",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "1726052402948x774776404873285300"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Note by Id - non-existing Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/note/:UniqueID",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"note",
+										":UniqueID"
+									],
+									"variable": [
+										{
+											"key": "UniqueID",
+											"value": "123456789"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GET - the list of all users",
+					"item": [
+						{
+							"name": "Get list of Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - user by Id",
+					"item": [
+						{
+							"name": "Get User by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/obj/user/:UniqueId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"obj",
+										"user",
+										":UniqueId"
+									],
+									"variable": [
+										{
+											"key": "UniqueId",
+											"value": "1625047362532x398219546419355650"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://cerebrumhubcrmlite.bubbleapps.io/api/1.1"
+		},
+		{
+			"key": "authToken",
+			"value": "AUTH_TOKEN"
+		}
+	]
+}
