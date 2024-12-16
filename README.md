@@ -13,7 +13,3 @@ The client is a digital agency offering innovative marketing and web design solu
 3. Funnels management (creation and management of CRM funnels);
 4. Deals management (creation and management of deals in different funnels.
 
-
-
-
--
