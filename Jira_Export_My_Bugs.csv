@@ -1,0 +1,885 @@
+Summary,Issue key,Issue id,Issue Type,Status,Project key,Project name,Project type,Project lead,Project lead id,Project description,Priority,Resolution,Assignee,Assignee Id,Reporter,Reporter Id,Creator,Creator Id,Created,Updated,Last Viewed,Resolved,Due date,Votes,Labels,Description,Environment,Watchers,Watchers,Watchers Id,Watchers Id,Original estimate,Remaining Estimate,Time Spent,Work Ratio,Σ Original Estimate,Σ Remaining Estimate,Σ Time Spent,Security Level,,,,,,
+Deals API - Wrong error code when searching deal by incorrect Id type,T12CA-196,30130,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,05/09/2024 12:46,27/09/2024 17:41,10/12/2024 16:09,,,0,,"When retrieving a deal by UniqueID with the wrong data type (e.g., boolean), the system still validates it as a string and returns a 404 Not Found error code.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/deal/:UniqueID
+# Set UniqueID value to boolean (true or false)
+
+*Expected result:*
+
+(/) The API should return a client error response, such as: HTTP Status Code 400 (Bad Request)
+
+*Example of a Possible Error Response:* 
+
+{noformat}{
+    ""error"": {
+        ""code"": 400,
+        ""message"": ""Invalid data type for 'UniqueID': expected string, received boolean.""
+    }
+}{noformat}
+
+*Actual result:*
+
+(x)  The validation with incorrect data type returns 404 Not Found error code.
+
+!deals unique id boolean.jpg|width=1126,height=589,alt=""deals unique id boolean.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,,,,,,,,,,,,,,,,
+Deals API - Possible to create a deal with empty body,T12CA-195,30129,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,05/09/2024 10:34,27/09/2024 17:41,12/09/2024 13:02,,,0,,"It is possible to create a new deal with an empty body request. 
+
+*Steps:*
+
+# Send POST request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/deal 
+{noformat}{ 
+
+}{noformat}
+
+*Expected result:*
+
+(/)  The expected error type would typically be a _400 Bad Request_.  Since the creation of a deal requires certain parameters and an empty body provides none, it would be considered malformed.
+
+*Actual result:*
+
+(x)  *201Created* result is returned when creating a new deal with an empty body.
+
+!deal empty body.jpg|width=1293,height=637,alt=""deal empty body.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Deals API - Possible to create a new deal without mandatory fields,T12CA-194,30121,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,04/09/2024 11:20,27/09/2024 17:41,12/09/2024 13:02,,,0,,"The system allows creating a new deal without mandatory fields (assignee__user, company_name_text, company_name_text, name_text, order_number, status_option_status, visible_to_list_user).
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/deal
+# Add the body with no mandatory fields:
+{noformat}{
+  ""description_text"": ""Team 5 Test no mandatory fields"",
+  ""funnel_custom_funnel1"": ""1724748016077x923297551481141200"",
+  ""lead_custom_lead"": ""1725010563849x249896618869343900"",
+  ""note_list_custom_note"": [
+    ""1627393624856x199214596987551740""
+  ],
+  ""stage_custom_stage"": ""1678718571924x727404269818871800""
+}{noformat}
+
+*Expected result:*
+
+(/)  Error code: 401 Unauthorized. Error message displayed: ""Permission denied: cannot create this object""
+
+*Actual result:*
+
+(x)  A new deal without mandatory fields  is successfully created - 201Created.
+
+!deal no mandatory fields 201.jpg|width=1258,height=594,alt=""deal no mandatory fields 201.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Deals API - Negative cursor value gives 500 error code,T12CA-193,30120,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,03/09/2024 12:13,27/09/2024 17:41,12/09/2024 13:02,,,0,,"When sending a GET request with a negative cursor key value (e.g., -10), we get a 500 Internal Server Error. 
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/deal?limit=10&cursor=-10
+
+*Expected result:*
+
+(/)  Instead of generating a server error, the API should return a client error response, such as: HTTP Status Code 400 (Bad Request) - {{""Cursor value must be a non-negative integer.""}} (example)
+
+*Actual result:*
+
+(x)  The negative cursor value leads to a 500 Internal Server Error.
+
+{noformat}{
+    ""error_class"": ""UnexpectedError"",
+    ""args"": {
+        ""code"": ""1725354822092x923571402946864500""
+    },
+    ""message"": ""Sorry, we ran into a temporary bug and can't complete your request. We'll fix it as soon as we can; please try again in a bit!""
+}{noformat}
+
+!deals negative cursor.jpg|width=1282,height=592,alt=""deals negative cursor.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Deals API - Possible to get the deal by ID without authorization,T12CA-192,30119,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Critical,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,03/09/2024 12:09,27/09/2024 17:41,11/09/2024 14:12,,,0,,"It is possible to get the deal by Id without being authorized.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/deal/:UniqueID 
+# In the Authorization tab of the request, select the ""*No auth*"" option instead of “Inherit auth from parent.”
+
+*Expected result:*
+
+(/)  The request should return a *401Unauthorized* error - {{""You do not have permission to get this object""}}
+
+*Actual result:*
+
+(x)  The unauthorized request returns a *200OK* response.
+
+!Deal by Id no auth.jpg|width=1312,height=580,alt=""Deal by Id no auth.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Deals API - Possible to retrieve the list of deals without authorization,T12CA-191,30118,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Critical,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,03/09/2024 12:06,09/09/2024 11:22,11/09/2024 14:12,,,0,,"It is possible to retrieve the list of deals without being authorized.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/deal
+# In the Authorization tab of the request, select the ""*No auth*"" option instead of “Inherit auth from parent.”
+
+*Expected result:*
+
+(/)  The request should return a *401Unauthorized* error.
+
+*Actual result:*
+
+(x)  The unauthorized request returns a *200OK* response.
+
+!List of deals no auth.jpg|width=1256,height=583,alt=""List of deals no auth.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Possible to create a lead with empty fields,T12CA-135,30054,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,30/08/2024 13:20,27/09/2024 17:41,11/09/2024 14:12,,,0,,"It is possible to create a new lead with empty fields. *NB*: company_text email_text are required fields. There is a separate bug for that.
+
+*Steps:*
+
+# Send POST request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead with all fields left empty, as shown below: 
+{noformat}{
+  ""company_text"": """",
+  ""email_text"": """",
+  ""full_name_text"": """"
+}{noformat}
+
+*Expected result:*
+
+(/)  The expected error type would be a _400 Bad Request_. This response indicates that the server could not process the request due to invalid input, since the creation of a lead requires certain parameters` input. 
+
+*Actual result:*
+
+(x)  *201Created* result is returned when creating a new lead with empty fields.
+
+!leads empty fields.jpg|width=1255,height=579,alt=""leads empty fields.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Possible to create a lead with empty body,T12CA-134,30053,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,30/08/2024 13:14,27/09/2024 17:41,11/09/2024 14:12,,,0,,"It is possible to create a new lead with an empty body. NB: company_text email_text are required fields. 
+
+*Steps:*
+
+# Send POST request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead with an empty body, as shown below: 
+{noformat}{
+
+}…{noformat}
+
+*Expected result:*
+
+(/)  The expected error type would typically be a _400 Bad Request_. This response indicates that the server could not process the request due to invalid input. Since the creation of a lead requires certain parameters and an empty body provides none, it would be considered malformed. _Also_, as the lead must have a company name and an email, there should be an informative message stating that the required fields are missing.
+
+*Actual result:*
+
+(x)  *201Created* result is returned when creating a new lead with an empty body.
+
+!lead empty body.jpg|width=1243,height=588,alt=""lead empty body.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Possible to create a new lead with full_name_text over 50 symbols,T12CA-132,30051,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,30/08/2024 13:08,27/09/2024 17:41,11/09/2024 14:12,,,0,,"The system allows creating a new lead with full_name_text field over 50 symbols.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead 
+# Add the body as shown in the example below (full_name_text field has 55 symbols) :
+{noformat}{
+  ""company_text"": ""Team 5.3"",
+  ""email_text"": ""randomemail2@gmail.com"",
+  ""full_name_text"": ""Team5Team5Team5Team5Team5Team5Team5Team5Team5Team5Team5""
+}{noformat}
+
+*Expected result:*
+
+(/)  Instead of successfully creating a new lead, the API should return an error response with the informative error message that the full_name_text field allows  maximum 50 symbols.
+
+*Actual result:*
+
+(x)  A new lead with full_name_text field over 50 symbols is successfully created - *201Created.*
+
+!leads full name 55.jpg|width=1138,height=580,alt=""leads full name 55.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Possible to create a new lead without mandatory fields,T12CA-131,30050,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,30/08/2024 12:59,27/09/2024 17:41,11/09/2024 14:11,,,0,,"The system allows creating a new lead without mandatory fields (company_text and email_text).
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead 
+# Add the body with blank company_text and email_text fields:
+{noformat}{
+  ""company_text"": """",
+  ""email_text"": """",
+  ""full_name_text"": ""Team 5 - no email, no company""
+}{noformat}
+
+*Expected result:*
+
+(/)  Instead of successfully creating a new lead, the API should return an error response with the informative error message that the {{company_text and company_text}} fields are required to be filled in.
+
+*Actual result:*
+
+(x)  A new lead without company_text and email_text  is successfully created - *201Created.*
+
+!leads no email no company.jpg|width=1293,height=586,alt=""leads no email no company.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Possible to create a new lead with email_text over 100 symbols,T12CA-129,30048,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,30/08/2024 12:54,27/09/2024 17:41,11/09/2024 14:11,,,0,,"The system allows creating a new lead with email_text field over 100 symbols.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead 
+# Add the body as shown in the example below:
+{noformat}{
+  ""company_text"": ""Team 5.2"",
+  ""email_text"": ""Anemailwithmorethan100symbolsqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzx@gmail.com"",
+  ""full_name_text"": ""Team 5.100""
+}{noformat}
+
+*Expected result:*
+
+(/)  Instead of successfully creating a new lead, the API should return an error response with the informative error message that the {{email_text}} field allows maximum 100 symbols.
+
+*Actual result:*
+
+(x)  A new lead with email_text field over 100 symbols is successfully created - *201Created.*
+
+!leads email 101.jpg|width=1282,height=595,alt=""leads email 101.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Possible to create a new lead with company_text over 50 symbols,T12CA-125,30044,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,30/08/2024 12:42,27/09/2024 17:41,11/09/2024 14:11,,,0,,"The system allows creating a new lead with company_text field over 50 symbols.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead 
+# Add the body as shown in the example below:
+{noformat}{
+  ""company_text"": ""Team5Team5Team5Team5Team5Team5Team5Team5Team5Team5Team5"",
+  ""email_text"": ""team5@gmail.com"",
+  ""full_name_text"": ""Team 5 55""
+}{noformat}
+
+*Expected result:*
+
+(/)  Instead of successfully creating a new lead, the API should return an error response with the informative error message that the {{company_text}} field allows  maximum 50 symbols.
+
+*Actual result:*
+
+(x)  A new lead with company_text field over 50 symbols is successfully created - *201Created.*
+
+!leads company text 55.jpg|width=1243,height=472,alt=""leads company text 55.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Negative cursor value gives incorrect error code,T12CA-107,30026,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,29/08/2024 22:13,27/09/2024 17:41,11/09/2024 14:11,,,0,,"When sending a request with a negative cursor key value (e.g., -50) we get a 500 Internal Server Error. 
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead?cursor=-50
+
+*Expected result:*
+
+(/)  Instead of generating a server error, the API should return a client error response, such as: HTTP Status Code 400 (Bad Request) - {{""Cursor value must be a non-negative integer.""}} (example)
+
+*Actual result:*
+
+(x)  The negative cursor value leads to a 500 Internal Server Error.
+
+{noformat}{
+    ""error_class"": ""UnexpectedError"",
+    ""args"": {
+        ""code"": ""1724745667439x273790634814998100""
+    },
+    ""message"": ""Sorry, we ran into a temporary bug and can't complete your request.  We'll fix it as soon as we can; please try again in a bit!""
+}{noformat}
+
+!leads negative cursor.jpg|width=1293,height=585,alt=""leads negative cursor.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - No error when validating incorrect data types,T12CA-105,30024,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,29/08/2024 22:06,27/09/2024 17:41,11/09/2024 14:11,,,0,,"When checking for incorrect data types across various parameters, no errors are generated, and the validation is considered successful, resulting in a 200 OK status code.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead 
+# Try: set *limit* parameter value to -  boolean (true or false)
+# Try: set *cursor* parameter value to - boolean (true or false)
+
+*Expected result:*
+
+(/)  Instead of getting a 200OK response, the API should return a client error response, such as: HTTP Status Code 400 (Bad Request)
+
+*Example of a Possible Error Response:* 
+
+{noformat}{
+    ""error"": {
+        ""code"": 400,
+        ""message"": ""Invalid data type for 'cursor': expected integer, received boolean.""
+    }
+}{noformat}
+
+*Actual result:*
+
+(x)  The validations with incorrect data types are considered successful, resulting in a 200 OK status code.
+
+!leads limit boolean.jpg|width=1246,height=577,alt=""leads limit boolean.jpg""!
+
+!leads cursor true.jpg|width=1260,height=529,alt=""leads cursor true.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Wrong response when max limit value is exceeded,T12CA-104,30023,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,29/08/2024 21:58,27/09/2024 17:41,11/09/2024 14:11,,,0,,"When setting the “limit” value over 100 (max limit), the list of all leads is still shown.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead?limit=101 
+
+*Expected result:*
+
+(/)  Instead of the 200OK response, an informative error message should be displayed to the user indicating that the limit has been exceeded. We might receive a 400 Bad Request. 
+
+*Actual result:*
+
+(x)  The 200OK response is returned.
+
+!lead limit 101.jpg|width=1249,height=534,alt=""lead limit 101.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Possible to get the lead by ID without authorization,T12CA-103,30022,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Critical,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,29/08/2024 21:49,27/09/2024 17:41,11/09/2024 14:11,,,0,,"It is possible to get the funnel by Id without requiring authorization.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead/:UniqueID 
+# In the Authorization tab of the request, select the ""*No auth*"" option instead of “Inherit auth from parent.”
+
+*Expected result:*
+
+(/)  The request should return a *401Unauthorized* error - {{Permission denied: cannot retrieve this object}}
+
+*Actual result:*
+
+(x)  The unauthorized request returns a *200OK* response.
+
+!leads id no auth.jpg|width=1278,height=583,alt=""leads id no auth.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Leads API - Possible to retrieve the list of leads without authorization,T12CA-102,30021,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Critical,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,29/08/2024 21:45,27/09/2024 17:41,11/09/2024 14:10,,,0,,"It is possible to retrieve the list of funnels without requiring authorization.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/lead 
+# In the Authorization tab of the request, select the ""*No auth*"" option instead of “Inherit auth from parent.”
+
+*Expected result:*
+
+(/)  The request should return a *401Unauthorized* error.
+
+*Actual result:*
+
+(x)  The unauthorized request returns a *200OK* response.
+
+{noformat}  {
+                ""Created Date"": ""2024-08-27T19:59:24.523Z"",
+                ""Created By"": ""admin_user_cerebrumhubcrmlite_live"",
+                ""Modified Date"": ""2024-08-27T19:59:24.523Z"",
+                ""_id"": ""1724788764523x697336527403194000""
+            }
+        ],
+        ""count"": 100,
+        ""remaining"": 49
+    }
+}{noformat}
+
+!Leads list no auth.jpg|width=1258,height=586,alt=""Leads list no auth.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+"Stages API, DELETE - Wrong error code when the expected Id type does not match the provided type",T12CA-93,30010,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,29/08/2024 13:00,27/09/2024 17:41,11/09/2024 14:10,,,0,,"The expected error when sending a DELETE request for stages with an incorrect data type (boolean instead of a string for a unique ID) could likely be _a validation error or a 400 Bad Request response_, indicating that the provided type does not match the expected type. However, the system still treats the boolean data _as a string_ and returns a *404Not Found error.*
+
+*Steps:*
+
+# Send DELETE request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage/:UniqueID
+# Add a boolean value (true or false) as a UniqueID.
+
+*Expected result:*
+
+(/)  We should get _a validation error or a 400 Bad Request response_, indicating that the provided type does not match the expected type.  -{{""Invalid data for field UniqueID: Expected a string, but got a boolean""}} (example)
+
+*Actual result:*
+
+(x) The system still treats the boolean data as a string and returns a *404Not Found error.*
+
+{noformat}{
+    ""statusCode"": 404,
+    ""body"": {
+        ""status"": ""MISSING_DATA"",
+        ""message"": ""Missing object of type funnel: object with id false does not exist""
+    }
+}{noformat}
+
+!DELETE stage boolean.jpg|width=1158,height=613,alt=""DELETE stage boolean.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Stages API - No error when replaces parameters with incorrect data types (color_option_colors - boolean),T12CA-91,30008,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,29/08/2024 12:32,27/09/2024 17:41,11/09/2024 14:10,,,0,,"When replacing the {{color_option_colors}} with the wrong data type (boolean instead of string), no errors are generated, and the validation is considered successful, resulting in a *204No Content* status code. In this case, we expect the system to return a  400 *Bad Request* error code.
+
+*Steps:*
+
+# Send PUT request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage/:UniqueID
+# Set {{color_option_colors}} value to boolean (true or false)
+
+*Expected result:*
+
+(/)  Instead of getting a 204No Content response, the API should return a client error response, such as: HTTP Status Code 400 (Bad Request)
+
+*Actual result:*
+
+(x)  The request with incorrect data type is considered successful, resulting in a 204 No Content result.
+
+!PUT stage color boolean.jpg|width=1219,height=552,alt=""PUT stage color boolean.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Stages API - Possible to create a stage with name_text 21+ characters,T12CA-84,29995,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,29/08/2024 11:36,27/09/2024 17:41,11/09/2024 14:10,,,0,,"It is possible to create a new stage in Postman with a stage name over 21 characters (The CRMY states that *Stage name can only be 21 characters*).
+
+!stage name 21.jpg|width=435,height=211,alt=""stage name 21.jpg""!
+
+*Steps:*
+
+# Send POST request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage with the name_text over 21 symbols, as shown below: 
+{noformat}{
+  ""color_option_colors"": ""Pinkish"",
+  ""deals_list_custom_deal1"": [],
+  ""funnel_custom_funnel1"": ""1724677207945x687761705721445400"",
+  ""name_text"": ""stagestagestagestagestage""
+}{noformat}
+
+*Expected result:*
+
+(/)  The expected error type would typically be a _400 Bad Request_.
+
+*Response Example:*
+
+{noformat}{
+  ""success"": false,
+  ""error"": ""Validation Error"",
+  ""message"": ""The 'name_text' field must not exceed 21 characters. Please shorten the name to meet the character limit.""
+}{noformat}
+
+*Actual result:*
+
+(x)  *201Created* result is returned when creating a new stage with a stage name over 21 characters.
+
+!stage 25 characters.jpg|width=1159,height=606,alt=""stage 25 characters.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Stages API - Possible to create a stage with empty fields,T12CA-68,29975,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 21:18,27/09/2024 17:41,11/09/2024 14:10,,,0,,"It is possible to create a new stage in Postman with empty fields.
+
+*Steps:*
+
+# Send POST request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage with all fields left empty, as shown below: 
+{noformat}{
+  ""color_option_colors"": """",
+  ""deals_list_custom_deal1"": [],
+  ""funnel_custom_funnel1"": """",
+  ""name_text"": """"
+}{noformat}
+
+*Expected result:*
+
+(/)  The expected error type would typically be a _400 Bad Request_. This response indicates that the server could not process the request due to invalid input, since the creation of a funnel requires certain parameters` input (for example, the color value is a mandatory field for a stage).
+
+*Actual result:*
+
+(x)  *201Created* result is returned when creating a new stage with empty fields.
+
+!stage post empty fields.jpg|width=1158,height=616,alt=""stage post empty fields.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Stages API - Possible to create a stage with empty body,T12CA-67,29974,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 21:14,27/09/2024 17:41,11/09/2024 14:10,,,0,,"It is possible to create a new stage with an empty body.
+
+*Steps:*
+
+# Send POST request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage with an empty body, as shown below: 
+{noformat}{
+}…{noformat}
+
+*Expected result:*
+
+(/)  The expected error type would typically be a _400 Bad Request_. This response indicates that the server could not process the request due to invalid input. Since the creation of a funnel requires certain parameters and an empty body provides none, it would be considered malformed.
+
+*Actual result:*
+
+(x)  *201Created* result is returned when creating a new stage with an empty body.
+
+!post stage empty body.jpg|width=1116,height=621,alt=""post stage empty body.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Stages API - Wrong sorting order sort_field name_text,T12CA-65,29972,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 20:15,27/09/2024 17:41,11/09/2024 14:09,,,0,,"Stages sorting by name_text by both descending=true and descending=false returns incorrect results. E.g., in both requests (with descending=true and descending=false, sort_field name_text) the order is:
+
+# {{""name_text"": ""Initialize ""}}
+# {{""name_text"": ""Revise  ""}}
+# {{""name_text"": ""Determine goals ""}}
+# {{""name_text"": ""Build the concept ""}}
+# {{""name_text"": ""Initial Contact ""}} , etc.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage?sort_field =name_text 
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage?sort_field =name_text&descending=true
+# Verify that in both cases the sorting has wrong order
+
+*Expected result:*
+
+(/)  For the sorting order by name_text, the objects should be sorted in alphabetical order ASC:  A to Z.
+
+(/) For the sorting order by name_text & descending=true, the objects should be sorted in alphabetical order DESC.
+
+
+
+*Actual result:*
+
+(x)  Both requests return the list of objects sorted by_name (asc or desc) in a random order.
+
+
+
+!stages sorting desc wrong.mp4|width=1126,height=650,alt=""stages sorting desc wrong.mp4""!
+
+
+
+!stages sorting name wrong.mp4|width=1112,height=638,alt=""stages sorting name wrong.mp4""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,Joonas-Kaarel Ranne,712020:871031bf-3701-4c4e-9d78-59167b71221b,712020:a550e313-6a90-4c2d-941b-f513197e2936,,,,,,,,,,,,,,
+Stages API - Wrong or no error when validating incorrect data types,T12CA-48,29955,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 12:58,27/09/2024 17:41,11/09/2024 14:09,,,0,,"When checking for incorrect data types across various parameters, no errors are generated, and the validation is considered successful, resulting in a 200 OK status code. In the case of retrieving a stage by UniqueID with the wrong data type (e.g., boolean), the system still validates it as a string and returns a  404 *Not Found* error code.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage
+# Try: set *limit* parameter value to boolean (true or false);
+# Try: set *cursor* parameter value to string (e.g., example@example.com)
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage/:UniqueID
+# Try: set UniqueID value to boolean (true or false)
+
+*Expected result:*
+
+(/)  Instead of getting a 200OK response, the API should return a client error response, such as: HTTP Status Code 400 (Bad Request)
+
+*Example of a Possible Error Response:* 
+
+{noformat}{
+    ""error"": {
+        ""code"": 400,
+        ""message"": ""Invalid data type for 'cursor': expected integer, received string.""
+    }
+}{noformat}
+
+*Actual result:*
+
+(x)  The validations with incorrect data types are considered successful, resulting in a 200 OK status code or 404 Not Found error code.
+
+
+
+!stages cursor string.jpg|width=1090,height=621,alt=""stages cursor string.jpg""!
+
+!stages limit boolean.jpg|width=1096,height=652,alt=""stages limit boolean.jpg""!
+
+!stage uniqueid boolean.jpg|width=1107,height=622,alt=""stage uniqueid boolean.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Funnels API - No error when validating incorrect data types,T12CA-47,29954,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 12:38,27/09/2024 17:41,11/09/2024 14:09,,,0,,"When checking for incorrect data types across various parameters, no errors are generated, and the validation is considered successful, resulting in a 200 OK status code.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/funnel 
+# Try: set *limit* parameter value to - 
+## boolean (true or false);
+## array (e.g., [""apple"", ""banana"", ""cherry""])
+# Try: set *cursor* parameter value to - 
+## boolean (true or false);
+## string (e.g., jonh_doe)
+
+*Expected result:*
+
+(/)  Instead of getting a 200OK response, the API should return a client error response, such as: HTTP Status Code 400 (Bad Request)
+
+*Example of a Possible Error Response:* 
+
+{noformat}{
+    ""error"": {
+        ""code"": 400,
+        ""message"": ""Invalid data type for 'cursor': expected integer, received string.""
+    }
+}{noformat}
+
+*Actual result:*
+
+(x)  The validations with incorrect data types are considered successful, resulting in a 200 OK status code.
+
+!funnel cursor boolean.jpg|width=1074,height=643,alt=""funnel cursor boolean.jpg""!
+
+!funnels cursor string.jpg|width=1113,height=663,alt=""funnels cursor string.jpg""!
+
+!funnels limit boolean.jpg|width=1117,height=652,alt=""funnels limit boolean.jpg""!
+
+!funnels limit array.jpg|width=1099,height=634,alt=""funnels limit array.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Stages API - Negative cursor value gives incorrect error code,T12CA-46,29953,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 11:47,27/09/2024 17:41,11/09/2024 14:08,,,0,,"When sending a GET request with a negative cursor key value (e.g., -50) we get a 500 Internal Server Error. 
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage?cursor=-50
+
+*Expected result:*
+
+(/)  Instead of generating a server error, the API should return a client error response, such as: HTTP Status Code 400 (Bad Request) - {{""Cursor value must be a non-negative integer.""}} (example)
+
+*Actual result:*
+
+(x)  The negative cursor value leads to a 500 Internal Server Error.
+
+{noformat}{
+    ""error_class"": ""UnexpectedError"",
+    ""args"": {
+        ""code"": ""1724834755558x461338696422665340""
+    },
+    ""message"": ""Sorry, we ran into a temporary bug and can't complete your request. We'll fix it as soon as we can; please try again in a bit!""
+}{noformat}
+
+!stages negative cursor.jpg|width=1104,height=646,alt=""stages negative cursor.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Stages API - Wrong response when max limit value is exceeded,T12CA-45,29952,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 11:40,27/09/2024 17:41,11/09/2024 14:08,,,0,,"When setting the “limit” value over 100 (max limit according to the documentation), the list of all stages is still shown with no error indicating that the limit has been exceeded.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage?limit=101
+
+*Expected result:*
+
+(/)  Instead of the 200OK response, an informative error message should be displayed to the user indicating that the limit has been exceeded. We should receive a 400 Bad Request. 
+
+*Actual result:*
+
+(x)  The 200OK response is returned.
+
+{noformat}{
+         }
+        ],
+        ""count"": 47,
+        ""remaining"": 0
+    }
+}{noformat}
+
+!stages limit 101.jpg|width=1066,height=657,alt=""stages limit 101.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Funnels API - Wrong error code when the expected Id type does not match the provided type ,T12CA-44,29951,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 11:21,27/09/2024 17:41,11/09/2024 14:08,,,0,,"* The expected error when sending a DELETE request for funnels with an incorrect data type (boolean instead of a string for a unique ID) could likely be _a validation error or a 400 Bad Request response_, indicating that the provided type does not match the expected type. However, the system still treats the boolean data as a string and returns a *404Not Found error.*
+* When trying to retrieve the funnel by invalid Id type (number instead of string),  the system also treats the integer data as a string and returns a *404Not Found error.*
+
+*Steps:*
+
+# Send DELETE request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/funnel/:UniqueID
+# Add a boolean value (true or false) as a UniqueID.
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/funnel/:UniqueID
+# Add a number as a UniqueID.
+
+*Expected result:*
+
+(/)  We should get _a validation error or a 400 Bad Request response_, indicating that the provided type does not match the expected type.  -{{""Invalid data for field UniqueID: Expected a string, but got a boolean""}} (example)
+
+*Actual result:*
+
+(x) The system still treats the boolean data as a string and returns a *404Not Found error.*
+
+{noformat}{
+    ""statusCode"": 404,
+    ""body"": {
+        ""status"": ""MISSING_DATA"",
+        ""message"": ""Missing object of type funnel: object with id false does not exist""
+    }
+}{noformat}
+
+!funeel id number.jpg|width=1278,height=487,alt=""funeel id number.jpg""!
+
+
+
+!delete wrong data type 404 (4136dca5-4539-48bf-8065-8a167851bde5).jpg|width=1243,height=658,alt=""delete wrong data type 404.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Stages API - Possible to retrieve the stage by ID without authorization,T12CA-43,29950,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Critical,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 11:13,27/09/2024 17:41,11/09/2024 14:08,,,0,,"It is possible to get the stage by Id without requiring authorization.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage/:UniqueId 
+# In the Authorization tab of the request, select the ""*No auth*"" option instead of “Inherit auth from parent.”
+
+*Expected result:*
+
+(/)  The request should return a *401Unauthorized* error - {{Permission denied: cannot retrieve this object}}
+
+*Actual result:*
+
+(x)  The unauthorized request returns a *200OK* response.
+
+!stage by id no auth.jpg|width=1089,height=631,alt=""stage by id no auth.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Stages API - Possible to retrieve the list of stages without authorization,T12CA-42,29949,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Critical,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,28/08/2024 11:05,27/09/2024 17:41,11/09/2024 14:08,,,0,,"It is possible to retrieve the list of stages without requiring authorization.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/stage
+# In the Authorization tab of the request, select the ""*No auth*"" option instead of “Inherit auth from parent.”
+
+*Expected result*
+
+(/)  The request should return a *401Unauthorized* error.
+
+*Actual result:*
+
+(x)  The unauthorized request returns a *200OK* response.
+
+!Stages list no auth.jpg|width=1099,height=672,alt=""Stages list no auth.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Funnels API - Wrong response when max limit value is exceeded,T12CA-36,29941,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,27/08/2024 19:41,27/09/2024 17:41,11/09/2024 14:08,,,0,,"When setting the “limit” value over 100 (max limit), the list of all funnels is still shown.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/funnel?limit=101
+
+*Expected result:*
+
+(/)  Instead of the 200OK response, an informative error message should be displayed to the user indicating that the limit has been exceeded. We might receive a 400 Bad Request. 
+
+*Actual result:*
+
+(x)  The 200OK response is returned.
+
+!Limit 101.jpg|width=867,height=601,alt=""Limit 101.jpg""!
+
+{noformat}{
+         }
+        ],
+        ""count"": 22,
+        ""remaining"": 0
+    }
+}{noformat}","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Funnels API - Possible to create a funnel with empty fields,T12CA-26,29929,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,27/08/2024 12:03,27/09/2024 17:41,11/09/2024 14:07,,,0,,"It is possible to create a new funnel with empty fields. NB: Stages are required to create funnels. The funnel must have at least 1 stage.
+
+*Steps:*
+
+# Send POST request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/funnel with all fields left empty, as shown below: 
+{noformat}{
+  ""members_list_user"": [
+    """",
+    """"
+  ],
+  ""name_text"": """",
+  ""stage_list_custom_stage"": [
+    """",
+    """"
+  ]
+}{noformat}
+
+*Expected result:*
+
+(/)  The expected error type would typically be a _400 Bad Request_. This response indicates that the server could not process the request due to invalid input, since the creation of a funnel requires certain parameters` input. Also, as the funnel must have at least 1 stage, there should be an informative message stating that the required field is missing.
+
+*Example response for a Required Field scenario*:
+
+{noformat}{
+  ""success"": false,
+  ""error"": ""Validation Error"",
+  ""message"": ""Missing required field: 'stage_list_custom_stage'.""
+}{noformat}
+
+*Actual result:*
+
+(x)  *201Created* result is returned when creating a new funnel with empty fields.
+
+!post empty fields.jpg|width=993,height=675,alt=""post empty fields.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Funnels API - Possible to create a funnel with empty body,T12CA-25,29928,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,High,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,27/08/2024 11:42,27/09/2024 17:41,11/09/2024 14:07,,,0,,"It is possible to create a new funnel with an empty body. NB: Stages are required to create funnels. The funnel must have at least 1 stage.
+
+*Steps:*
+
+# Send POST request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/funnel with an empty body, as shown below: 
+{noformat}{ 
+
+}…{noformat}
+
+*Expected result:*
+
+(/)  The expected error type would typically be a _400 Bad Request_. This response indicates that the server could not process the request due to invalid input. Since the creation of a funnel requires certain parameters and an empty body provides none, it would be considered malformed. Also, as the funnel must have at least 1 stage, there should be an informative message stating that the required field is missing.
+
+*Example response for a Required Field scenario*:
+
+{noformat}{
+  ""success"": false,
+  ""error"": ""Validation Error"",
+  ""message"": ""Missing required field: 'stage_list_custom_stage'.""
+}{noformat}
+
+*Actual result:*
+
+(x)  *201Created* result is returned when creating a new funnel with an empty body.
+
+!post empty body.jpg|width=1071,height=643,alt=""post empty body.jpg""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Funnels API - Possible to get the funnel by ID without authorization ,T12CA-24,29927,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Critical,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,27/08/2024 11:27,27/09/2024 17:41,11/09/2024 14:07,,,0,,"It is possible to get the funnel by Id without requiring authorization.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/funnel/:UniqueID 
+# In the Authorization tab of the request, select the ""*No auth*"" option instead of “Inherit auth from parent.”
+
+*Expected result:*
+
+(/)  The request should return a *401Unauthorized* error - {{Permission denied: cannot retrieve this object}}
+
+*Actual result:*
+
+(x)  The unauthorized request returns a *200OK* response.
+
+!No auth funnel by id.mp4|width=1236,height=564,alt=""No auth funnel by id.mp4""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Funnels API - Possible to retrieve the list of funnels without authorization,T12CA-23,29926,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Critical,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,27/08/2024 11:14,27/09/2024 17:41,11/09/2024 14:07,,,0,,"It is possible to retrieve the list of funnels without requiring authorization.
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/funnel
+# In the Authorization tab of the request, select the ""*No auth*"" option instead of “Inherit auth from parent.”
+
+*Expected result:*
+
+(/)  The request should return a *401Unauthorized* error.
+
+*Actual result:*
+
+(x)  The unauthorized request returns a *200OK* response.
+
+!No auth list of tunnels.mp4|width=1234,height=692,alt=""No auth list of tunnels.mp4""!","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
+Funnels API - Negative cursor value gives incorrect error code,T12CA-22,29925,Bug,To Do,T12CA,CRM APP,software,Cerebrum Hub,6202bc6d6ba61b006fb5463f,,Medium,,,,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,Darya Prokharchyk,712020:871031bf-3701-4c4e-9d78-59167b71221b,27/08/2024 10:46,27/09/2024 17:41,11/09/2024 14:07,,,0,,"When sending a request with a negative cursor key value (e.g., -50) we get a 500 Internal Server Error. 
+
+*Steps:*
+
+# Send GET request to url: https://cerebrumhubcrmlite.bubbleapps.io/api/1.1/obj/funnel?cursor=-50
+
+*Expected result:*
+
+(/)  Instead of generating a server error, the API should return a client error response, such as: HTTP Status Code 400 (Bad Request) - {{""Cursor value must be a non-negative integer.""}} (example)
+
+*Actual result:*
+
+(x)  The negative cursor value leads to a 500 Internal Server Error.
+
+{noformat}{
+    ""error_class"": ""UnexpectedError"",
+    ""args"": {
+        ""code"": ""1724745667439x273790634814998100""
+    },
+    ""message"": ""Sorry, we ran into a temporary bug and can't complete your request.  We'll fix it as soon as we can; please try again in a bit!""
+}{noformat}","Windows 11 Home OS build: 22631.4037, Google Chrome Version: 126.0.6478.62
+
+Postman for Web Version 11.10.0-240820-1117",Darya Prokharchyk,,712020:871031bf-3701-4c4e-9d78-59167b71221b,,,,,,,,,,,,,,,
