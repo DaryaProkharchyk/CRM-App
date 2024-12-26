@@ -1,5 +1,4 @@
 **Note 1:**
-
 This repository showcases specific examples of my contributions to a collaborative project carried out within a Scrum team. Please note that it includes only a portion of the complete project, as my aim is to highlight my individual work rather than the entirety of the team's efforts.
 
 **Note 2:**
